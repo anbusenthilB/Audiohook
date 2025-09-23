@@ -3,7 +3,7 @@ const WebSocket = require('ws');
 const path = require('path');
 const http = require('http');
 
-const PORT = process.env.PORT || 443;
+const PORT = process.env.PORT || 8080;
 const OUTPUT_FILE = path.join(__dirname, 'streamed-audio.raw');
 
 const app = express();
@@ -39,4 +39,5 @@ wss.on('connection', (ws) => {
 server.listen(PORT, () => {
   console.log(`WebSocket server listening on port ${PORT}`);
 });
+
 
