@@ -3,13 +3,14 @@ const WebSocket = require('ws');
 const path = require('path');
 const http = require('http');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 443;
 const OUTPUT_FILE = path.join(__dirname, 'streamed-audio.raw');
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200);
-  res.end('WebSocket server is running');
-});
+const app = express();
+app.get('/', (req, res) => res.status(200).send('AudioHook Monitor is alive'));
+
+const server = http.createServer(app);
+
 
 const wss = new WebSocket.Server({ server });
 
@@ -38,3 +39,4 @@ wss.on('connection', (ws) => {
 server.listen(PORT, () => {
   console.log(`WebSocket server listening on port ${PORT}`);
 });
+
